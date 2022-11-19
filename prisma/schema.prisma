@@ -27,7 +27,7 @@ model Message {
   receiver_id Int
   created_at  DateTime @db.Timestamp(6)
   artist      String   @db.VarChar(100)
-  is_opened   Boolean
+  is_opened   Int
   Category    Category @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "message_category_id_fk")
   User        User     @relation(fields: [receiver_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "message_user_id_fk")
 }
