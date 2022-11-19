@@ -29,8 +29,18 @@ const createMessage = async (messageCreateDTO:MessageCreateDTO) => {
     return data.id;
 }
 
+const getMessageDetail = async (messageId: number) => {
+    const data = await prisma.message.findUnique({
+        where: {
+            id: messageId
+        }
+    })
+    return data
+}
+
 const messageService = {
-    createMessage
+    createMessage,
+    getMessageDetail
 };
 
 export default messageService;

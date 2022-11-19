@@ -15,8 +15,15 @@ const createMessage = async (req: Request, res: Response) => {
     return res.status(statusCode.CREATED).send(success(statusCode.CREATED, responseMessage.SUCCESS_CREATE_MESSAGE, data));
 };
 
+const getMessageDetail = async (req: Request, res: Response) => {
+    const { messageId } = req.params;
+    const data = await messageService.getMessageDetail(+messageId);
+    return res.status(statusCode.OK).send(success(statusCode.OK, responseMessage.SUCCESS_GET_MESSAGE_DETAIL, data));
+}
+
 const messageController = {
-    createMessage
+    createMessage,
+    getMessageDetail
 };
 
 export default messageController;
