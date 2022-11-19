@@ -22,7 +22,7 @@ const createMessage = async (messageCreateDTO:MessageCreateDTO) => {
             category_id: messageCreateDTO.categoryId,
             receiver_id: user.id,
             created_at: requestTime, 
-            is_opened: false 
+            is_opened: 0
         }
     })
 
