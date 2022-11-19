@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { messageService } from "../service";
-import { MessageCreateDTO } from "../interfaces/messageCreateDTO";
+import { MessageCreateDTO } from "../interfaces/MessageCreateDTO";
 import { responseMessage, statusCode } from "../constants";
 import { success, fail } from "../constants/response";
 
