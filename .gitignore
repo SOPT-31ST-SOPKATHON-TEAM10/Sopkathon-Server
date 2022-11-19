@@ -186,4 +186,4 @@ node_modules
 dist
 .vscode
 Footer
-.pem
+*.pem
