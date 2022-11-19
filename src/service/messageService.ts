@@ -38,9 +38,40 @@ const getMessageDetail = async (messageId: number) => {
     return data
 }
 
+const getCategoryMessage = async (categoryId:number, nickname:string, isOpened:number) => {
+    const user = await prisma.user.findFirst({
+        where:{
+            nickname: nickname
+        }
+    })
+
+    if(!user) return;
+
+    if(isOpened == 2){
+        const data = await prisma.message.findMany({
+            where:{
+                category_id: categoryId,
+                receiver_id: user.id
+            }
+        })
+        return data;
+    } 
+
+    const data = await prisma.message.findMany({
+        where:{
+            category_id: categoryId,
+            receiver_id: user.id,
+            is_opened: isOpened
+        }
+    })
+    return data;
+}
+
+
 const messageService = {
     createMessage,
-    getMessageDetail
+    getMessageDetail,
+    getCategoryMessage
 };
 
 export default messageService;
