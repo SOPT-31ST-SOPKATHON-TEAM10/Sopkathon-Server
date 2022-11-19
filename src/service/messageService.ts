@@ -29,8 +29,38 @@ const createMessage = async (messageCreateDTO:MessageCreateDTO) => {
     return data.id;
 }
 
+const getCategoryMessage = async (categoryId:number, nickname:string, isOpened:number) => {
+    const user = await prisma.user.findFirst({
+        where:{
+            nickname: nickname
+        }
+    })
+
+    if(!user) return;
+
+    if(isOpened == 2){
+        const data = await prisma.message.findMany({
+            where:{
+                category_id: categoryId,
+                receiver_id: user.id
+            }
+        })
+        return data;
+    } 
+
+    const data = await prisma.message.findMany({
+        where:{
+            category_id: categoryId,
+            receiver_id: user.id,
+            is_opened: isOpened
+        }
+    })
+    return data;
+}
+
 const messageService = {
-    createMessage
+    createMessage,
+    getCategoryMessage
 };
 
 export default messageService;
