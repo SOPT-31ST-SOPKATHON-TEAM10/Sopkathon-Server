@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Category, Message, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import { MessageCreateDTO } from '../interfaces/MessageCreateDTO';
 import dayjs from "dayjs";
@@ -33,8 +33,12 @@ const getMessageDetail = async (messageId: number) => {
     const data = await prisma.message.findUnique({
         where: {
             id: messageId
+        },
+        include: {
+            Category: true
         }
     })
+
     return data
 }
 

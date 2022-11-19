@@ -30,8 +30,16 @@ const getMessageDetail = async (req: Request, res: Response) => {
         return res.status(statusCode.BAD_REQUEST).send(fail(statusCode.BAD_REQUEST, responseMessage.NO_MESSAGE));
     }
 
+    const result = {
+        id: data.id,
+        title: data.title, 
+        artist: data.artist,
+        contents: data.contents,
+        category: data.Category
+    }
+
     // 성공
-    return res.status(statusCode.OK).send(success(statusCode.OK, responseMessage.SUCCESS_GET_MESSAGE_DETAIL, data));
+    return res.status(statusCode.OK).send(success(statusCode.OK, responseMessage.SUCCESS_GET_MESSAGE_DETAIL, result));
 }
 
 const getCategoryMessage = async (req: Request, res: Response) => {
