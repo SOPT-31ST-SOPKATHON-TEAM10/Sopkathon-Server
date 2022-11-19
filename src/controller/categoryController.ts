@@ -8,6 +8,10 @@ const getCategory = async (req: Request, res: Response) => {
   
     const nickname  = req.query.nickname as string;
     const data = await categoryService.getCategory(nickname);
+
+    if (!nickname) {
+        return res.status(statusCode.BAD_REQUEST).send(fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE))
+    }
     
     // 성공
     return res.status(statusCode.OK)
