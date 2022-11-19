@@ -4,7 +4,7 @@
 
 서비스명: LP(Listening Present)
 
-소개:
+소개: 당신의 기분, 나아가 당신까지 변화시킬 음악과 메세지를 선물해줍니다.
 
 ## 팀원
 
@@ -17,9 +17,11 @@
 
 | API | 설명 | 담당 | 
 | --- | --- | --- |
-|[POST] /user|유저생성||
-|[POST] /message|메시지 생성||
-|[GET] /message|자신의 메시지 조회||
+|[POST] /user|유저생성|`혜수`|
+|[POST] /message|메시지 생성|`용택`|
+|[GET] /message/:categoryId?isopened={0,1}|자신의 메시지 조회|`용택`|
+|[GET] /message/:messageId|메시지 상세조회|`혜수`|
+|[GET] /category|카테고리별 메시지 개수 조회|`혜수`|
 
 ## 코드 컨벤션
 
