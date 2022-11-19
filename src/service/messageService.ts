@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-import { MessageCreateDTO } from '../interfaces/messageCreateDTO';
+import { MessageCreateDTO } from '../interfaces/MessageCreateDTO';
 import dayjs from "dayjs";
 
 const createMessage = async (messageCreateDTO:MessageCreateDTO) => {
