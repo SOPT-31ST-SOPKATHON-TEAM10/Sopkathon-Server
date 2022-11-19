@@ -49,3 +49,15 @@
 ├── tsconfig.json
 └── yarn.lock
 ```
+
+## ERD
+
+## schema.prisma
+
+## package.json
+
+## server architecture
+
+![KakaoTalk_Photo_2022-11-20-00-11-21](https://user-images.githubusercontent.com/68391767/202857637-0c9d3fc3-b861-44be-83cd-2f19bacfe0b6.png)
+
+
