@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Category, Message, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import { MessageCreateDTO } from '../interfaces/MessageCreateDTO';
 import dayjs from "dayjs";
@@ -27,6 +27,19 @@ const createMessage = async (messageCreateDTO:MessageCreateDTO) => {
     })
 
     return data.id;
+}
+
+const getMessageDetail = async (messageId: number) => {
+    const data = await prisma.message.findUnique({
+        where: {
+            id: messageId
+        },
+        include: {
+            Category: true
+        }
+    })
+
+    return data
 }
 
 const getCategoryMessage = async (categoryId:number, nickname:string, isOpened:number) => {
@@ -58,8 +71,10 @@ const getCategoryMessage = async (categoryId:number, nickname:string, isOpened:n
     return data;
 }
 
+
 const messageService = {
     createMessage,
+    getMessageDetail,
     getCategoryMessage
 };
 
