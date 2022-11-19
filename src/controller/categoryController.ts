@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { responseMessage, statusCode } from "../constants";
 import { fail, success } from "../constants/response";
-import { categoryService } from "../service";
+import { categoryService, userService } from "../service";
 
 // * 카테고리 별 메시지 수 조회
 const getCategory = async (req: Request, res: Response) => {
@@ -11,6 +11,13 @@ const getCategory = async (req: Request, res: Response) => {
 
     if (!nickname) {
         return res.status(statusCode.BAD_REQUEST).send(fail(statusCode.BAD_REQUEST, responseMessage.NULL_VALUE))
+    }
+
+    const user = await userService.findUserByNickname(nickname);
+
+    if (user.length == 0) {
+        return res.status(statusCode.BAD_REQUEST)
+        .send(fail(statusCode.BAD_REQUEST, responseMessage.NO_USER));
     }
     
     // 성공
