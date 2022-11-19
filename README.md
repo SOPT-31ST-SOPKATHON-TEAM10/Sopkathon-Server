@@ -51,10 +51,76 @@
 ```
 
 ## ERD
+![KakaoTalk_Photo_2022-11-20-00-34-00](https://user-images.githubusercontent.com/68391767/202858644-b39eda22-27ea-47d9-9d90-68665a1debde.png)
 
 ## schema.prisma
 
+```
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  nickname String    @db.VarChar(100)
+  Message  Message[]
+}
+
+model Category {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(100)
+  Message Message[]
+}
+
+model Message {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(100)
+  contents    String   @db.VarChar(500)
+  category_id Int
+  receiver_id Int
+  created_at  DateTime @db.Timestamp(6)
+  artist      String   @db.VarChar(100)
+  is_opened   Boolean
+  Category    Category @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "message_category_id_fk")
+  User        User     @relation(fields: [receiver_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "message_user_id_fk")
+}
+
+```
+
 ## package.json
+
+```json
+{
+  "name": "Sopkathon-Server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/SOPT-31ST-SOPKATHON-TEAM10/Sopkathon-Server.git",
+  "author": "hyesuuou <68391767+hyesuuou@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc && node dist",
+    "db:pull": "npx prisma db pull",
+    "db:push": "npx prisma db push",
+    "generate": "npx prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.6.1",
+    "express": "^4.18.2",
+    "prisma": "^4.6.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.9",
+    "nodemon": "^2.0.20"
+  }
+}
+```
 
 ## server architecture
 
