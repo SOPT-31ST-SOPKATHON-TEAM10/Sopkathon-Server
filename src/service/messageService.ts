@@ -40,6 +40,17 @@ const getMessageDetail = async (messageId: number) => {
     })
 
     return data
+};
+
+const updateMessageOpened = async (messageId: number) => {
+    await prisma.message.update({
+        where: {
+            id: messageId
+        },
+        data: {
+            is_opened: 1,
+         },
+    })
 }
 
 const getCategoryMessage = async (categoryId:number, nickname:string, isOpened:number) => {
@@ -75,7 +86,8 @@ const getCategoryMessage = async (categoryId:number, nickname:string, isOpened:n
 const messageService = {
     createMessage,
     getMessageDetail,
-    getCategoryMessage
+    getCategoryMessage,
+    updateMessageOpened
 };
 
 export default messageService;

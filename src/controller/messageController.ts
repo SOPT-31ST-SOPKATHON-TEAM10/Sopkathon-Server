@@ -30,6 +30,9 @@ const getMessageDetail = async (req: Request, res: Response) => {
         return res.status(statusCode.BAD_REQUEST).send(fail(statusCode.BAD_REQUEST, responseMessage.NO_MESSAGE));
     }
 
+
+    await messageService.updateMessageOpened(+messageId);
+
     const result = {
         id: data.id,
         title: data.title, 
