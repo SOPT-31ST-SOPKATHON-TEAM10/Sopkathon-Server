@@ -37,7 +37,6 @@
 
 ``` plain text
 ├── README.md
-├── insopt-server-key.pem
 ├── node_module
 ├── nodemon.json
 ├── package.json
