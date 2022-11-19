@@ -8,7 +8,26 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @db.VarChar(100)
-  name  String @db.VarChar(100)
+  id       Int       @id @default(autoincrement())
+  nickname String    @db.VarChar(100)
+  Message  Message[]
+}
+
+model Category {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(100)
+  Message Message[]
+}
+
+model Message {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(100)
+  contents    String   @db.VarChar(500)
+  category_id Int
+  receiver_id Int
+  created_at  DateTime @db.Timestamp(6)
+  artist      String   @db.VarChar(100)
+  is_opened   Boolean
+  Category    Category @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "message_category_id_fk")
+  User        User     @relation(fields: [receiver_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "message_user_id_fk")
 }
